@@ -16,6 +16,50 @@
   --tag-bg:#ede8e2;--tag-text:#5a4f47;
   --radius:8px;--radius2:12px;
 }
+/* ── Themes ── */
+/* dark mode tag text override */
+body.theme-dark .tag-pill,
+body.theme-dark .fic-tag-pill{color:#e0d8d0 !important}
+body.theme-dark .tag-pill.include{color:#e0d8d0 !important}
+body.theme-dark {
+  --bg:#1a1a1f;--bg2:#22222a;--bg3:#2a2a35;--card:#1e1e26;--border:#38384a;--border2:#4a4a60;
+  --text:#e8e4de;--text2:#c0b8b0;--text3:#7a7080;
+  --accent:#c4845a;--accent2:#d4a070;--accent-bg:#2e2018;
+  --green:#4a8a5a;--green-bg:#182a20;--red:#a05050;--red-bg:#2a1818;
+  --tag-bg:#2a2a35;--tag-text:#e0d8d0;
+}
+body.theme-pink{
+  --bg:#fdf4f7;--bg2:#f7e8ef;--bg3:#f0dce8;--card:#fffafc;--border:#e8c8d8;--border2:#d8a8c0;
+  --text:#3a1828;--text2:#7a4860;--text3:#b088a0;
+  --accent:#c0507a;--accent2:#d87098;--accent-bg:#fce8f0;
+  --green:#7a9a60;--green-bg:#e8f4e0;--red:#c05060;--red-bg:#fce8ea;
+  --tag-bg:#f5e0ea;--tag-text:#7a4860;
+}
+body.theme-spiderweb{
+  --bg:#f2f0ec;--bg2:#e8e5e0;--bg3:#dedad4;--card:#fafaf8;--border:#1a1a1a;--border2:#333;
+  --text:#0a0a0a;--text2:#2a2a2a;--text3:#555;
+  --accent:#1a1a1a;--accent2:#333;--accent-bg:#e8e5e0;
+  --green:#2a5a2a;--green-bg:#d8ecd8;--red:#5a1a1a;--red-bg:#ecd8d8;
+  --tag-bg:#e8e5e0;--tag-text:#0a0a0a;
+}
+/* spiderweb corners */
+body.theme-spiderweb::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cg stroke='%231a1a1a' stroke-width='1.4' fill='none' opacity='0.22'%3E%3Cline x1='0' y1='0' x2='320' y2='320'/%3E%3Cline x1='0' y1='0' x2='0' y2='220'/%3E%3Cline x1='0' y1='0' x2='220' y2='0'/%3E%3Cline x1='0' y1='0' x2='90' y2='220'/%3E%3Cline x1='0' y1='0' x2='220' y2='90'/%3E%3Cline x1='0' y1='0' x2='160' y2='60'/%3E%3Cline x1='0' y1='0' x2='60' y2='160'/%3E%3Cellipse cx='0' cy='0' rx='70' ry='70'/%3E%3Cellipse cx='0' cy='0' rx='130' ry='130'/%3E%3Cellipse cx='0' cy='0' rx='190' ry='190'/%3E%3Cellipse cx='0' cy='0' rx='250' ry='250'/%3E%3Cellipse cx='0' cy='0' rx='310' ry='310'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cg stroke='%231a1a1a' stroke-width='1.4' fill='none' opacity='0.22'%3E%3Cline x1='320' y1='0' x2='0' y2='320'/%3E%3Cline x1='320' y1='0' x2='320' y2='220'/%3E%3Cline x1='320' y1='0' x2='100' y2='0'/%3E%3Cline x1='320' y1='0' x2='230' y2='220'/%3E%3Cline x1='320' y1='0' x2='100' y2='90'/%3E%3Cline x1='320' y1='0' x2='160' y2='60'/%3E%3Cline x1='320' y1='0' x2='260' y2='160'/%3E%3Cellipse cx='320' cy='0' rx='70' ry='70'/%3E%3Cellipse cx='320' cy='0' rx='130' ry='130'/%3E%3Cellipse cx='320' cy='0' rx='190' ry='190'/%3E%3Cellipse cx='320' cy='0' rx='250' ry='250'/%3E%3Cellipse cx='320' cy='0' rx='310' ry='310'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cg stroke='%231a1a1a' stroke-width='1.4' fill='none' opacity='0.22'%3E%3Cline x1='0' y1='320' x2='320' y2='0'/%3E%3Cline x1='0' y1='320' x2='0' y2='100'/%3E%3Cline x1='0' y1='320' x2='220' y2='320'/%3E%3Cline x1='0' y1='320' x2='90' y2='100'/%3E%3Cline x1='0' y1='320' x2='220' y2='230'/%3E%3Cline x1='0' y1='320' x2='160' y2='260'/%3E%3Cline x1='0' y1='320' x2='60' y2='160'/%3E%3Cellipse cx='0' cy='320' rx='70' ry='70'/%3E%3Cellipse cx='0' cy='320' rx='130' ry='130'/%3E%3Cellipse cx='0' cy='320' rx='190' ry='190'/%3E%3Cellipse cx='0' cy='320' rx='250' ry='250'/%3E%3Cellipse cx='0' cy='320' rx='310' ry='310'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cg stroke='%231a1a1a' stroke-width='1.4' fill='none' opacity='0.22'%3E%3Cline x1='320' y1='320' x2='0' y2='0'/%3E%3Cline x1='320' y1='320' x2='320' y2='100'/%3E%3Cline x1='320' y1='320' x2='100' y2='320'/%3E%3Cline x1='320' y1='320' x2='230' y2='100'/%3E%3Cline x1='320' y1='320' x2='100' y2='230'/%3E%3Cline x1='320' y1='320' x2='160' y2='260'/%3E%3Cline x1='320' y1='320' x2='260' y2='160'/%3E%3Cellipse cx='320' cy='320' rx='70' ry='70'/%3E%3Cellipse cx='320' cy='320' rx='130' ry='130'/%3E%3Cellipse cx='320' cy='320' rx='190' ry='190'/%3E%3Cellipse cx='320' cy='320' rx='250' ry='250'/%3E%3Cellipse cx='320' cy='320' rx='310' ry='310'/%3E%3C/g%3E%3C/svg%3E");
+  background-position:top left, top right, bottom left, bottom right;
+  background-repeat:no-repeat;
+  background-size:320px 320px;
+}
+body.theme-spiderweb .sidebar{z-index:2;isolation:isolate}
+body.theme-spiderweb .main{z-index:1;isolation:isolate}
+body.theme-spiderweb #load-panel{z-index:1;isolation:isolate}
+body.theme-spiderweb .fic-card{border-width:1.5px}
+body.theme-spiderweb .filter-section{border-bottom-width:1.5px}
+body.theme-spiderweb .sidebar{border-right-width:2px}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}
 h1,h2,h3{font-family:'Lora',serif}
 .layout{display:flex;min-height:100vh}
@@ -135,6 +179,12 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 .cal-modal h4{font-size:14px;font-family:'DM Sans';font-weight:500;margin-bottom:12px;color:var(--text)}
 .cal-modal input[type="date"]{display:block;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;margin-bottom:12px;outline:none}
 .cal-actions{display:flex;gap:8px;justify-content:flex-end}
+/* theme grid */
+.theme-grid{display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;padding:4px 2px}
+.theme-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 4px;border-radius:var(--radius);border:2px solid transparent;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:10px;color:var(--text3);transition:all 0.15s;width:48px}
+.theme-btn:hover{color:var(--text2)}
+.theme-btn.active{border-color:var(--accent);color:var(--accent)}
+.theme-circle{width:32px;height:32px;border-radius:50%;border:2px solid rgba(0,0,0,0.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
 /* rating pills */
 .rp{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:12px;cursor:pointer;user-select:none;transition:all 0.12s;gap:4px;border:1px solid transparent;color:#fff;font-weight:500}
 .rp:hover{filter:brightness(1.1)}
@@ -348,9 +398,17 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
       </div>
     </div>
 
-    <div style="padding:14px 18px;border-bottom:1px solid var(--border)">
-      <button class="reset-all" style="margin:0;width:100%" onclick="showLoad()">↑ Load new data</button>
+    <!-- Theme switcher -->
+    <div class="filter-section" id="sec-theme">
+      <div class="filter-section-header">
+        <h3>Appearance</h3>
+        <button class="toggle-arrow" onclick="toggleSection('theme')">▼</button>
+      </div>
+      <div class="filter-body">
+        <div class="theme-grid" id="theme-grid"></div>
+      </div>
     </div>
+
   </aside>
 
   <main class="main">
@@ -538,6 +596,7 @@ function init(){
   document.getElementById('load-panel').style.display='none';
   document.getElementById('app-layout').style.display='flex';
   document.getElementById('sidebar-sub').textContent=fics.length+' fics loaded';
+  initThemes();
   render();
 }
 
@@ -960,7 +1019,48 @@ function resetDesc(){document.getElementById('desc-search').value='';render();}
 function resetAll(){resetFandom();resetStatus();resetRating();resetMC();resetFic();resetDate();resetDesc();}
 
 document.getElementById('cal-overlay').onclick=function(e){if(e.target===this)closeCal(false);};
-window.addEventListener('load', loadStoredURLs);
+window.addEventListener('load', ()=>{ loadStoredURLs(); initThemes(); });
+
+// ── Themes ──
+const THEMES = [
+  { id:'default',   name:'Light',      color:'#eee9e0', border:'#7c4f2f', icon:'' },
+  { id:'dark',      name:'Dark',       color:'#22222a', border:'#c4845a', icon:'' },
+  { id:'pink',      name:'Pink',       color:'#f7e8ef', border:'#c0507a', icon:'' },
+  { id:'spiderweb', name:'Web',        color:'#f2f0ec', border:'#1a1a1a', icon:'🕸️' },
+
+];
+
+function initThemes(){
+  const saved = localStorage.getItem('fb_theme')||'default';
+  applyTheme(saved, false);
+  const grid = document.getElementById('theme-grid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  THEMES.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'theme-btn' + (t.id===saved?' active':'');
+    btn.dataset.theme = t.id;
+    const inner = t.icon || '';
+    const circle = document.createElement('span');
+    circle.className = 'theme-circle';
+    circle.style.background = t.color;
+    circle.style.borderColor = t.border;
+    if(inner) circle.textContent = inner;
+    btn.appendChild(circle);
+    btn.appendChild(document.createTextNode(t.name));
+    btn.onclick = () => applyTheme(t.id, true);
+    grid.appendChild(btn);
+  });
+}
+
+function applyTheme(id, save){
+  THEMES.forEach(t => document.body.classList.remove('theme-'+t.id));
+  if(id !== 'default') document.body.classList.add('theme-'+id);
+  document.querySelectorAll('.theme-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme===id);
+  });
+  if(save) try{ localStorage.setItem('fb_theme', id); }catch(e){}
+}
 </script>
 </body>
 </html>
