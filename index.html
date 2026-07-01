@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Fanfic Browser</title>
+<title>Bzaurpa's Reading List</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <style>
@@ -50,8 +50,8 @@ h1,h2,h3{font-family:'Lora',serif}
 .tag-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid;user-select:none;transition:all 0.12s;line-height:1.4}
 .tag-pill:hover{filter:brightness(0.92)}
 .tag-pill.neutral{background:var(--tag-bg);border-color:var(--border);color:var(--tag-text)}
-.tag-pill.include{background:var(--green-bg);border-color:var(--green);color:var(--green)}
-.tag-pill.exclude{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+.tag-pill.include{}
+.tag-pill.exclude{opacity:0.4;filter:saturate(0.2)}
 .tag-pill .cnt{font-size:10px;opacity:0.65}
 .status-pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:var(--tag-bg);color:var(--tag-text);user-select:none;transition:all 0.12s;gap:4px}
 .status-pill.active{background:var(--accent-bg);border-color:var(--accent2);color:var(--accent)}
@@ -117,6 +117,7 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 .fic-bottom{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:8px}
 .fic-tag-pill{font-size:11px;padding:2px 8px;border-radius:10px;border:1px solid;white-space:nowrap}
 .fic-tag-pill.inc{background:var(--green-bg);color:var(--green);border-color:var(--green)}
+.tag-dot{font-size:18px;color:var(--border2);padding:0 3px;align-self:center;line-height:1}
 .fic-tag-pill.exc{background:var(--red-bg);color:var(--red);border-color:var(--red)}
 .details-btn{margin-left:auto;font-size:11px;padding:3px 10px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--text3);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.12s;white-space:nowrap;flex-shrink:0}
 .details-btn:hover{background:var(--bg2);color:var(--text2)}
@@ -137,8 +138,8 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 /* rating pills */
 .rp{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:12px;cursor:pointer;user-select:none;transition:all 0.12s;gap:4px;border:1px solid transparent;color:#fff;font-weight:500}
 .rp:hover{filter:brightness(1.1)}
-.rp.exclude{opacity:0.4;text-decoration:line-through}
-.rp.active{box-shadow:0 0 0 2px #fff, 0 0 0 4px currentColor}
+.rp.exclude{opacity:0.4}
+.rp.active{filter:brightness(1.2)}
 .rp-awesome{background:#7b2fbe;border-color:#5a1e99}
 .rp-great{background:#2a80c0;border-color:#1a60a0}
 .rp-good{background:#4a9e6e;border-color:#2d7a50}
@@ -150,13 +151,13 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 .rp-kill{background:#340000;border-color:#1a0000}
 .rp-bite{background:#6a8a3c;border-color:#4a6a1c}
 .rp-pleasure{background:#c06080;border-color:#a04060}
-.rp-dash{background:#b7b7b7;border-color:#979797;color:#333}
+.rp-dash{background:#b7b7b7;border-color:#979797;color:#fff}
 /* rating badges on cards */
 .rb{font-size:12px;font-weight:500;padding:2px 9px;border-radius:10px;white-space:nowrap;margin-left:auto;color:#fff}
 .rb-awesome{background:#7b2fbe}.rb-great{background:#2a80c0}.rb-good{background:#4a9e6e}
 .rb-decent{background:#8aaf68}.rb-uninteresting{background:#7a7a72}.rb-guilty{background:#c46b20}
 .rb-failure{background:#b84040}.rb-trash{background:#7a1c1c}.rb-kill{background:#340000}
-.rb-bite{background:#6a8a3c}.rb-pleasure{background:#c06080}.rb-dash{background:#b7b7b7;color:#333}
+.rb-bite{background:#6a8a3c}.rb-pleasure{background:#c06080}.rb-dash{background:#b7b7b7;color:#fff}
 </style>
 </head>
 <body>
@@ -176,13 +177,13 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 <!-- Load screen -->
 <div id="load-panel">
   <div class="load-screen">
-    <h2>Fanfic Browser</h2>
-    <p class="subtitle">Connect your Google Sheets to get started. You need two published CSV URLs — one for your fics sheet, one for your tags sheet.</p>
+    <h2>Bzaurpa's Reading List</h2>
+    <p class="subtitle">Connect your Google Sheets to get started. You need two published CSV URLs — one for your novels sheet, one for your tags sheet.</p>
 
     <div class="load-card">
       <h3>Google Sheet URLs</h3>
       <div class="url-field">
-        <label>Fics sheet URL</label>
+        <label>Novels sheet URL</label>
         <input type="text" id="fics-url" placeholder="https://docs.google.com/spreadsheets/d/.../pub?gid=...&output=csv"/>
       </div>
       <div class="url-field">
@@ -202,7 +203,7 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
     <div class="load-card">
       <h3>Paste CSV</h3>
       <div class="url-field" style="margin-bottom:10px">
-        <label>Fics CSV</label>
+        <label>Novels CSV</label>
         <textarea class="csv-input" id="csv-fics" placeholder="Paste fics CSV here…"></textarea>
       </div>
       <div class="url-field" style="margin-bottom:10px">
@@ -219,7 +220,7 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 <div class="layout" id="app-layout" style="display:none">
   <aside class="sidebar">
     <div class="sidebar-header">
-      <h1>Fanfic Browser</h1>
+      <h1>Bzaurpa's Reading List</h1>
       <p id="sidebar-sub"></p>
     </div>
     <button class="reset-all" onclick="resetAll()">↺ Reset all filters</button>
@@ -464,8 +465,7 @@ function parseTagsCSV(txt){
     ficMap[cat].tags.push(tag);
   });
   ficTagStructure=Object.values(ficMap).sort((a,b)=>a.nr-b.nr);
-  // sort tags alphabetically within each category
-  ficTagStructure.forEach(s=>s.tags.sort((a,b)=>a.localeCompare(b)));
+  // tags kept in sheet row order (no alphabetical sort)
 
   // build mc tag structure
   const mcMap={};
@@ -478,7 +478,7 @@ function parseTagsCSV(txt){
     mcMap[cat].tags.push(tag);
   });
   mcTagStructure=Object.values(mcMap).sort((a,b)=>a.nr-b.nr);
-  mcTagStructure.forEach(s=>s.tags.sort((a,b)=>a.localeCompare(b)));
+  // mc tags kept in sheet row order
 }
 
 function allTagsFlat(field){
@@ -653,17 +653,19 @@ function buildTagContainer(containerId, structure, states, cycleFn, field){
 function makePill(tag, count, states, cycleFn, color){
   const pill=document.createElement('span');
   const state=states[tag]||'neutral';
-  if(color&&state==='neutral'){
-    // use category color for neutral state
-    pill.className='tag-pill neutral';
-    const hex=color.startsWith('#')?color:null;
-    if(hex){
-      pill.style.background=hexToRgba(hex,0.15);
-      pill.style.borderColor=hexToRgba(hex,0.5);
-      pill.style.color=hex;
-    }
-  } else {
-    pill.className=`tag-pill ${state}`;
+  pill.className=`tag-pill ${state}`;
+  const hex=color&&color.startsWith('#')?color:null;
+  if(hex&&state==='neutral'){
+    pill.style.background=hexToRgba(hex,0.25);
+    pill.style.borderColor=hex;
+    pill.style.color='#1a1a1a';
+  } else if(hex&&state==='include'){
+    pill.style.background=hexToRgba(hex,0.25);
+    pill.style.borderColor=hex;
+    pill.style.color='#1a1a1a';
+    pill.style.outline='3px solid #fff';
+    pill.style.outlineOffset='2px';
+    pill.style.boxShadow=`0 0 0 5px ${hex}`;
   }
   pill.dataset.t=tag;
   pill.innerHTML=`${tag} <span class="cnt">${count}</span>`;
@@ -709,8 +711,19 @@ function cycleRating(r){
   document.querySelectorAll('#rating-list .rp').forEach(el=>{
     if(el.dataset.r===r){
       el.classList.remove('active','exclude');
-      if(ratingStates[r]==='include') el.classList.add('active');
-      else if(ratingStates[r]==='exclude') el.classList.add('exclude');
+      el.style.outline='';
+      el.style.outlineOffset='';
+      el.style.boxShadow='';
+      if(ratingStates[r]==='include'){
+        el.classList.add('active');
+        const ratingColors={'awesome':'#7b2fbe','great':'#2a80c0','good':'#4a9e6e','decent':'#8aaf68','uninteresting':'#7a7a72','guilty':'#c46b20','failure':'#b84040','trash':'#7a1c1c','kill the author':'#340000','bite':'#6a8a3c','pleasure':'#c06080','-':'#b7b7b7'};
+        const rc=ratingColors[r]||'#888';
+        el.style.outline=`3px solid #fff`;
+        el.style.outlineOffset='2px';
+        el.style.boxShadow=`0 0 0 5px ${rc}`;
+      } else if(ratingStates[r]==='exclude'){
+        el.classList.add('exclude');
+      }
     }
   });
   render();
@@ -723,20 +736,29 @@ function cycleTagState(tag, states, containerId, cycleFn){
   document.querySelectorAll(`#${containerId} .tag-pill`).forEach(el=>{
     if(el.dataset.t===tag){
       const newState=states[tag];
+      const color=findTagColor(tag, containerId);
+      el.style.outline=''; el.style.outlineOffset=''; el.style.boxShadow='';
       if(newState==='neutral'){
-        // restore color styling
         el.className='tag-pill neutral';
-        // find color from structure
-        const color=findTagColor(tag, containerId);
         if(color){
-          el.style.background=hexToRgba(color,0.15);
-          el.style.borderColor=hexToRgba(color,0.5);
-          el.style.color=color;
+          el.style.background=hexToRgba(color,0.25);
+          el.style.borderColor=color;
+          el.style.color='#1a1a1a';
         } else {
           el.style.background=''; el.style.borderColor=''; el.style.color='';
         }
+      } else if(newState==='include'){
+        el.className='tag-pill include';
+        if(color){
+          el.style.background=hexToRgba(color,0.25);
+          el.style.borderColor=color;
+          el.style.color='#1a1a1a';
+          el.style.outline='3px solid #fff';
+          el.style.outlineOffset='2px';
+          el.style.boxShadow=`0 0 0 5px ${color}`;
+        }
       } else {
-        el.className=`tag-pill ${newState}`;
+        el.className='tag-pill exclude';
         el.style.background=''; el.style.borderColor=''; el.style.color='';
       }
     }
@@ -837,6 +859,21 @@ function applyRatingFilter(fic){
   return inc.includes(fic.rating);
 }
 
+// ── Tag sort helper ──
+function sortTagsByStructure(tags, structure){
+  // build lookup: tag -> {categoryIndex, tagIndex}
+  const order={};
+  structure.forEach((sec,si)=>{
+    sec.tags.forEach((t,ti)=>{ order[t]={si,ti}; });
+  });
+  return [...tags].sort((a,b)=>{
+    const oa=order[a]||{si:9999,ti:9999};
+    const ob=order[b]||{si:9999,ti:9999};
+    if(oa.si!==ob.si) return oa.si-ob.si;
+    return oa.ti-ob.ti;
+  });
+}
+
 // ── Render ──
 function render(){
   const q=(document.getElementById('desc-search').value||'').toLowerCase();
@@ -866,17 +903,17 @@ function render(){
       ?`<a class="fic-title" href="${f.link}" target="_blank" rel="noopener">${f.title}</a>`
       :`<span class="fic-title" style="cursor:default">${f.title}</span>`;
 
-    const ficTagsHtml=f.fictags.map(t=>{
+    const sortedFicTags=sortTagsByStructure(f.fictags, ficTagStructure);
+    const sortedMcTags=sortTagsByStructure(f.mctags, mcTagStructure);
+    const ficTagsHtml=sortedFicTags.map(t=>{
       const color=findTagColor(t,'fic-tag-container');
-      const cls=ficInc.includes(t)?'inc':ficExc.includes(t)?'exc':'';
-      const style=(!cls&&color)?`style="background:${hexToRgba(color,0.15)};border-color:${hexToRgba(color,0.5)};color:${color}"`:'' ;
-      return `<span class="fic-tag-pill ${cls}" ${style}>${t}</span>`;
+      const style=color?`style="background:${hexToRgba(color,0.25)};border-color:${color};color:#1a1a1a"`:'' ;
+      return `<span class="fic-tag-pill" ${style}>${t}</span>`;
     }).join('');
-    const mcTagsHtml=f.mctags.map(t=>{
+    const mcTagsHtml=sortedMcTags.map(t=>{
       const color=findTagColor(t,'mc-tag-container');
-      const cls=mcInc.includes(t)?'inc':mcExc.includes(t)?'exc':'';
-      const style=(!cls&&color)?`style="background:${hexToRgba(color,0.15)};border-color:${hexToRgba(color,0.5)};color:${color}"`:'' ;
-      return `<span class="fic-tag-pill ${cls}" ${style}>${t}</span>`;
+      const style=color?`style="background:${hexToRgba(color,0.25)};border-color:${color};color:#1a1a1a"`:'' ;
+      return `<span class="fic-tag-pill" ${style}>${t}</span>`;
     }).join('');
 
     return `<div class="fic-card">
@@ -887,7 +924,7 @@ function render(){
       </div>
       ${f.description?`<div class="fic-desc" id="desc-${i}">${f.description}</div>`:''}
       <div class="fic-bottom">
-        ${ficTagsHtml}${mcTagsHtml}
+        ${ficTagsHtml}${(ficTagsHtml||mcTagsHtml)?"<span class=\"tag-dot\">·</span>":""}${mcTagsHtml}
         <button class="details-btn" onclick="toggleDetails(this,${i})">more details ▾</button>
       </div>
       <div class="fic-details" id="det-${i}">
