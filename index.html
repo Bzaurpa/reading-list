@@ -194,12 +194,15 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 .rp-great{background:#2a80c0;border-color:#1a60a0}
 .rp-good{background:#4a9e6e;border-color:#2d7a50}
 .rp-decent{background:#8aaf68;border-color:#6a8f48}
-.rp-uninteresting{background:#7a7a72;border-color:#5a5a52;color:#eee}
+.rp-uninteresting{background:#9c9a8b;border-color:#7a786a}
 .rp-guilty{background:#c46b20;border-color:#a04d08}
 .rp-failure{background:#b84040;border-color:#902020}
 .rp-trash{background:#7a1c1c;border-color:#5a0808}
 .rp-kill{background:#340000;border-color:#1a0000}
+.rp-yummy{background:#37bea3;border-color:#1a9e83}
 .rp-bite{background:#6a8a3c;border-color:#4a6a1c}
+.rp-chop{background:#ebb870;border-color:#cb9850;color:#fff}
+.rp-barf{background:#962c2c;border-color:#761010}
 .rp-pleasure{background:#c06080;border-color:#a04060}
 .rp-dash{background:#b7b7b7;border-color:#979797;color:#fff}
 /* rating badges on cards */
@@ -207,7 +210,7 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 .rb-awesome{background:#7b2fbe}.rb-great{background:#2a80c0}.rb-good{background:#4a9e6e}
 .rb-decent{background:#8aaf68}.rb-uninteresting{background:#7a7a72}.rb-guilty{background:#c46b20}
 .rb-failure{background:#b84040}.rb-trash{background:#7a1c1c}.rb-kill{background:#340000}
-.rb-bite{background:#6a8a3c}.rb-pleasure{background:#c06080}.rb-dash{background:#b7b7b7;color:#fff}
+.rb-yummy{background:#37bea3}.rb-bite{background:#6a8a3c}.rb-chop{background:#ebb870}.rb-barf{background:#962c2c}.rb-pleasure{background:#c06080}.rb-dash{background:#b7b7b7;color:#fff}
 </style>
 </head>
 <body>
@@ -420,9 +423,9 @@ textarea.csv-input{width:100%;height:100px;font-size:11px;font-family:monospace;
 </div>
 
 <script>
-const RATING_ORDER = ['awesome','great','good','decent','uninteresting','guilty','failure','trash','kill the author','bite','pleasure','-'];
-const RATING_CLASS = r => ({'awesome':'awesome','great':'great','good':'good','decent':'decent','uninteresting':'uninteresting','guilty':'guilty','failure':'failure','trash':'trash','kill the author':'kill','bite':'bite','pleasure':'pleasure','-':'dash'}[r]||'dash');
-const PRIORITY_FANDOMS = ['Worm','Naruto','BNHA','Original'];
+const RATING_ORDER = ['awesome','great','good','decent','uninteresting','guilty','failure','trash','kill the author','yummy','bite','chop','barf','pleasure','-'];
+const RATING_CLASS = r => ({'awesome':'awesome','great':'great','good':'good','decent':'decent','uninteresting':'uninteresting','guilty':'guilty','failure':'failure','trash':'trash','kill the author':'kill','yummy':'yummy','bite':'bite','chop':'chop','barf':'barf','pleasure':'pleasure','-':'dash'}[r]||'dash');
+const PRIORITY_FANDOMS = ['Worm','Naruto','BNHA','One Piece','Original','multiple'];
 
 let fics=[], ficTagStructure=[], mcTagStructure=[];
 let fandomStates={}, fandomMode='or';
@@ -654,14 +657,26 @@ function buildSidebar(){
   rl.innerHTML='';
   const rCnt={};
   fics.forEach(f=>{if(f.rating) rCnt[f.rating]=(rCnt[f.rating]||0)+1;});
-  RATING_ORDER.forEach(r=>{
-    if(!rCnt[r]) return;
-    const cls=RATING_CLASS(r);
-    const el=document.createElement('span');
-    el.className=`rp rp-${cls}`; el.dataset.r=r;
-    el.innerHTML=`${r} <span style="opacity:0.7;font-size:10px">${rCnt[r]}</span>`;
-    el.onclick=()=>cycleRating(r);
-    rl.appendChild(el);
+  const RATING_GROUPS=[
+    {label:'Rating', ratings:['awesome','great','good','decent','uninteresting','guilty','failure','trash','kill the author']},
+    {label:'Shorts',  ratings:['yummy','bite','chop','barf']},
+    {label:'Other',   ratings:['pleasure','-']},
+  ];
+  RATING_GROUPS.forEach(group=>{
+    const groupRatings=group.ratings.filter(r=>rCnt[r]);
+    if(!groupRatings.length) return;
+    const lbl=document.createElement('div');
+    lbl.style.cssText='width:100%;font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3);margin:6px 0 4px;font-family:"DM Sans",sans-serif;flex-basis:100%';
+    lbl.textContent=group.label;
+    rl.appendChild(lbl);
+    groupRatings.forEach(r=>{
+      const cls=RATING_CLASS(r);
+      const el=document.createElement('span');
+      el.className=`rp rp-${cls}`; el.dataset.r=r;
+      el.innerHTML=`${r} <span style="opacity:0.7;font-size:10px">${rCnt[r]}</span>`;
+      el.onclick=()=>cycleRating(r);
+      rl.appendChild(el);
+    });
   });
 
   // Fic tags
@@ -775,7 +790,7 @@ function cycleRating(r){
       el.style.boxShadow='';
       if(ratingStates[r]==='include'){
         el.classList.add('active');
-        const ratingColors={'awesome':'#7b2fbe','great':'#2a80c0','good':'#4a9e6e','decent':'#8aaf68','uninteresting':'#7a7a72','guilty':'#c46b20','failure':'#b84040','trash':'#7a1c1c','kill the author':'#340000','bite':'#6a8a3c','pleasure':'#c06080','-':'#b7b7b7'};
+        const ratingColors={'awesome':'#7b2fbe','great':'#2a80c0','good':'#4a9e6e','decent':'#8aaf68','uninteresting':'#9c9a8b','guilty':'#c46b20','failure':'#b84040','trash':'#7a1c1c','kill the author':'#340000','yummy':'#37bea3','bite':'#6a8a3c','chop':'#ebb870','barf':'#962c2c','pleasure':'#c06080','-':'#b7b7b7'};
         const rc=ratingColors[r]||'#888';
         el.style.outline=`3px solid #fff`;
         el.style.outlineOffset='2px';
